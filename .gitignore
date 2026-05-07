@@ -1,0 +1,29 @@
+# Config with sensitive paths and credentials
+server/dms_config.json
+ 
+# Document data — lives on network/cloud drive, not in repo
+_REGISTER/
+_ARCHIVE/
+QMS/
+PRODUCTS/
+INFORMAL_DOCS/
+ 
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.env
+.venv
+venv/
+ 
+# OS
+.DS_Store
+Thumbs.db
+ 
+# Node
+node_modules/
+ 
+# Editor
+.vscode/settings.json
+ 

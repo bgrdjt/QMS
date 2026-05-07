@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  QMS Excel Ribbon — customUI_excel.xml
+  Inject this into QMS_RiskRegister.xltm using Office RibbonX Editor.
+  Compatible with: Excel 2019, Excel 365
+-->
+<customUI xmlns="http://schemas.microsoft.com/office/2009/07/customui">
+  <ribbon>
+    <tabs>
+      <tab id="qmsExcelTab" label="QMS Tools" insertAfterMso="TabHome">
+
+        <!-- ── GROUP 1: Risk Register (ISO 14971) ── -->
+        <group id="grpRisk" label="Risk Register  (ISO 14971)">
+
+          <button id="btnNewRR"
+            label="New Risk Register"
+            screentip="Create a new ISO 14971 risk register worksheet"
+            supertip="Inserts a pre-structured risk register sheet with all required columns: Hazard ID, Hazard, Hazardous Situation, Harm, Severity (1-5), Probability (1-5), RPN, Risk Level, Acceptability, Risk Control Measure, Residual Severity, Residual Probability, Residual RPN, Residual Level, Verification Method, ISO 14971 Clause, Status."
+            size="large"
+            imageMso="GroupWorksheets"
+            onAction="QMS_NewRiskRegister" />
+
+          <button id="btnCalcRisk"
+            label="Calculate Risk Levels"
+            screentip="Auto-calculate RPN and risk acceptability for all rows"
+            supertip="Computes RPN = Severity x Probability for every data row. Maps result to ISO 14971 risk matrix: LOW (1-3), MEDIUM (4-8), HIGH (9-15), CRITICAL (16-25). Applies color-coded cell backgrounds."
+            size="large"
+            imageMso="AutoSum"
+            onAction="QMS_CalcRiskLevel" />
+
+        </group>
+
+        <!-- ── GROUP 2: Design Control (ISO 13485 §7.3) ── -->
+        <group id="grpDesign" label="Design Control  (ISO 13485 §7.3)">
+
+          <button id="btnNewDTM"
+            label="Traceability Matrix"
+            screentip="Create a Design Traceability Matrix sheet"
+            supertip="Inserts a traceability matrix tracing User Needs through Design Inputs, Design Outputs, Verification Methods, Validation Methods, Risk References, and ISO 13485 Stage. Required content for the Design and Development File (DDF)."
+            size="large"
+            imageMso="TableInsert"
+            onAction="QMS_NewTraceabilityMatrix" />
+
+        </group>
+
+        <!-- ── GROUP 3: QMS Register ── -->
+        <group id="grpRegister" label="QMS Register">
+
+          <button id="btnRegisterWB"
+            label="Register Workbook"
+            screentip="Register this Excel file as a QMS controlled document"
+            supertip="Assigns a document ID (RM, DC, or FM type), creates an entry in the document register, and logs the action. Use for risk registers, traceability matrices, and other Excel-based controlled records."
+            size="normal"
+            imageMso="RecordsAddFromOutlook"
+            onAction="QMS_RegisterWorkbook" />
+
+          <button id="btnRiskDocs"
+            label="Risk Documents"
+            screentip="List approved Risk Management documents from the QMS register"
+            supertip="Queries the DMS server for all effective Risk Management (RM) documents. Requires QMS Desktop App to be running."
+            size="normal"
+            imageMso="RecordsShowAllRecords"
+            onAction="QMS_ShowRiskDocs" />
+
+          <button id="btnOpenApp"
+            label="QMS App"
+            screentip="Launch the QMS Desktop Application"
+            supertip="Opens the full QMS dashboard for document management, CR tracking, routing, and register viewing."
+            size="normal"
+            imageMso="AdpDiagram"
+            onAction="QMS_OpenApp" />
+
+        </group>
+
+      </tab>
+    </tabs>
+  </ribbon>
+</customUI>

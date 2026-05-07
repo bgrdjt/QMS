@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  QMS Custom Ribbon v1.2 — Full customUI14.xml
+  Adds CR group to QMS Control tab.
+  Replace previous customUI14.xml with this file.
+-->
+<customUI xmlns="http://schemas.microsoft.com/office/2009/07/customui"
+          onLoad="RibbonOnLoad">
+  <ribbon>
+    <tabs>
+      <tab id="qmsTab" label="QMS Control" insertAfterMso="TabHome">
+
+        <!-- ── GROUP 1: Document Identity ── -->
+        <group id="grpIdentity" label="Document">
+          <labelControl id="lblDocStatus"   getLabel="GetDocStatusLabel" />
+          <labelControl id="lblRouteStatus" getLabel="GetRouteStatusLabel" />
+          <labelControl id="lblCRStatus"    getLabel="GetCRLabel" />
+          <button id="btnStatus"
+            label="Details" size="normal"
+            imageMso="RecordsShowAllRecords"
+            screentip="View full document register info"
+            onAction="QMS_ShowStatus" />
+          <button id="btnAudit"
+            label="Audit" size="normal"
+            imageMso="TableStylesGallery"
+            screentip="Show audit trail for this document"
+            onAction="QMS_ShowAuditLog" />
+        </group>
+
+        <!-- ── GROUP 2: Review ── -->
+        <group id="grpReview" label="Review">
+          <button id="btnRedline"
+            label="Start Redline" size="large"
+            imageMso="ReviewTrackChanges"
+            screentip="Enable Track Changes and mark redline review started"
+            onAction="QMS_StartRedline" />
+          <button id="btnCompleteReview"
+            label="Complete Review" size="large"
+            imageMso="ReviewAcceptChange"
+            screentip="Submit your review findings"
+            getEnabled="GetCompleteReviewEnabled"
+            onAction="QMS_CompleteReview" />
+        </group>
+
+        <!-- ── GROUP 3: Routing ── -->
+        <group id="grpRouting" label="Routing">
+          <button id="btnRouteReview"
+            label="Route for Review" size="large"
+            imageMso="SendForReview"
+            screentip="Assign to reviewers — DRAFT documents only"
+            getEnabled="GetSubmitEnabled"
+            onAction="QMS_RouteForReview" />
+          <button id="btnRouteApproval"
+            label="Route for Approval" size="large"
+            imageMso="WorkflowRequiresAttention"
+            screentip="Send to approver — IN_REVIEW documents only"
+            getEnabled="GetApprovalEnabled"
+            onAction="QMS_RouteForApproval" />
+          <button id="btnApprove"
+            label="Approve" size="large"
+            imageMso="ApproveWorkflow"
+            screentip="Approve document — moves to APPROVED_PENDING awaiting CR effectivity"
+            getEnabled="GetApprovalEnabled"
+            onAction="QMS_ApproveDocument" />
+          <separator id="sep1" />
+          <button id="btnRecall"
+            label="Recall" size="normal"
+            imageMso="Undo"
+            screentip="Recall from active routing"
+            getEnabled="GetRecallEnabled"
+            onAction="QMS_RecallDocument" />
+        </group>
+
+        <!-- ── GROUP 4: Change Request ── -->
+        <group id="grpCR" label="Change Request">
+          <button id="btnCRInfo"
+            label="CR Info" size="large"
+            imageMso="ChangeStylesStyle"
+            screentip="View Change Request details for this document"
+            supertip="Shows the CR number, status, linked documents, and effectivity info for the CR attached to this document."
+            onAction="QMS_ShowCRInfo" />
+          <button id="btnAttachCR"
+            label="Attach CR" size="normal"
+            imageMso="GroupFormulas"
+            screentip="Link this document to an existing CR"
+            supertip="Attach an existing CR number to this document. Creates the link in the register and the CR's linked documents list."
+            getEnabled="GetAttachCREnabled"
+            onAction="QMS_AttachCR" />
+          <button id="btnCreateCR"
+            label="New CR + Link" size="normal"
+            imageMso="RecordsAddFromOutlook"
+            screentip="Create a new CR and immediately link this document to it"
+            supertip="Creates a new Change Request, generates the CR Form document, and links this document to it — all in one step."
+            getEnabled="GetAttachCREnabled"
+            onAction="QMS_CreateAndAttachCR" />
+          <separator id="sep2" />
+          <button id="btnMakeEffective"
+            label="Make Effective" size="large"
+            imageMso="PublishSharePointWorkflow"
+            screentip="Trigger CR effectivity — releases all linked documents simultaneously"
+            supertip="Manual trigger for QA Lead. Flips this document and all other documents linked to its CR from APPROVED_PENDING to EFFECTIVE. Prior versions archived. Cannot be undone."
+            getEnabled="GetMakeEffectiveEnabled"
+            onAction="QMS_MakeCREffective" />
+        </group>
+
+        <!-- ── GROUP 5: Notifications & Navigation ── -->
+        <group id="grpNotif" label="Notifications &amp; Navigation">
+          <button id="btnNotifs"
+            label="Notifications"
+            getLabel="GetNotifCountLabel"
+            size="large"
+            imageMso="MailMergeGoToRecord"
+            screentip="View your pending QMS notifications"
+            onAction="QMS_ShowNotifications" />
+          <separator id="sep3" />
+          <button id="btnRelated"
+            label="Related Docs" size="normal"
+            imageMso="LinkedNotes"
+            screentip="Show related documents"
+            onAction="QMS_ViewRelated" />
+          <button id="btnOpenApp"
+            label="QMS App" size="normal"
+            imageMso="AdpDiagram"
+            screentip="Launch the QMS Desktop Application"
+            onAction="QMS_OpenApp" />
+        </group>
+
+      </tab>
+    </tabs>
+  </ribbon>
+</customUI>
